@@ -12,14 +12,14 @@ projectProperties.load(project.file("gradle.properties").newDataInputStream())
 
 def pomArtifactId = projectProperties.getProperty("POM_ARTIFACT_ID")
 
-def printLog(String msg) {
-    println("Maven-Publish >>> " + msg)
-}
+//def printLog(String msg) {
+//    println("Maven-Publish >>> " + msg)
+//}
 
-printLog("versionName:" + versionName)
-printLog("pomUrl:" + pomUrl)
-printLog("groupId:" + groupId)
-printLog("pomArtifactId:" + pomArtifactId)
+//printLog("versionName:" + versionName)
+//printLog("pomUrl:" + pomUrl)
+//printLog("groupId:" + groupId)
+//printLog("pomArtifactId:" + pomArtifactId)
 
 uploadArchives {
     repositories {

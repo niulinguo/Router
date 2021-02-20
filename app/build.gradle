@@ -30,6 +30,52 @@ android {
         }
     }
 
+    flavorDimensions "size", "material", "channel"
+
+    productFlavors {
+        small {
+            dimension "size"
+        }
+        big {
+            dimension "size"
+        }
+        egg {
+            dimension "material"
+            applicationIdSuffix '.egg'
+        }
+        bacon {
+            dimension "material"
+            applicationIdSuffix '.bacon'
+        }
+        baidu {
+            dimension "channel"
+            manifestPlaceholders = [
+                    MTA_CHANNEL_VALUE: "baidu"
+            ]
+        }
+        wandoujia {
+            dimension "channel"
+            manifestPlaceholders = [
+                    MTA_CHANNEL_VALUE: "wandoujia"
+            ]
+        }
+        xiaomi {
+            dimension "channel"
+            manifestPlaceholders = [
+                    MTA_CHANNEL_VALUE: "xiaomi"
+            ]
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (variant.buildType.name == 'release') {
+                def fileName = "Router_${variant.productFlavors[0].name}_${variant.productFlavors[1].name}_${variant.productFlavors[2].name}_${defaultConfig.versionName}.apk"
+                output.outputFileName = fileName
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

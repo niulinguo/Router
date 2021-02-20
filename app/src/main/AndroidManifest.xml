@@ -10,6 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GradeProject">
+
+        <meta-data
+            android:name="MTA_CHANNEL"
+            android:value="${MTA_CHANNEL_VALUE}" />
+
         <activity android:name="com.lingo.router.MainActivity" />
         <activity android:name="com.lingo.router.demo.ProfileActivity" />
         <activity android:name=".MainActivity">
