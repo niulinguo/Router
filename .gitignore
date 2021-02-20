@@ -10,7 +10,6 @@
 local.properties
 /repo
 /router_mapping
-页面文档.md
 # Project exclude paths
 /buildSrc/build/
 /router-annotations/build/
