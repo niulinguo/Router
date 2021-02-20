@@ -1,0 +1,43 @@
+apply plugin: 'maven'
+
+Properties gradleProperties = new Properties()
+gradleProperties.load(project.rootProject.file("gradle.properties").newDataInputStream())
+
+def versionName = gradleProperties.getProperty("VERSION_NAME")
+def pomUrl = gradleProperties.getProperty("POM_URL")
+def groupId = gradleProperties.getProperty("GROUP_ID")
+
+Properties projectProperties = new Properties()
+projectProperties.load(project.file("gradle.properties").newDataInputStream())
+
+def pomArtifactId = projectProperties.getProperty("POM_ARTIFACT_ID")
+
+def printLog(String msg) {
+    println("Maven-Publish >>> " + msg)
+}
+
+printLog("versionName:" + versionName)
+printLog("pomUrl:" + pomUrl)
+printLog("groupId:" + groupId)
+printLog("pomArtifactId:" + pomArtifactId)
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri(pomUrl)) {
+                pom.groupId = groupId
+                pom.artifactId = pomArtifactId
+                pom.version = versionName
+            }
+
+            pom.whenConfigured { pom ->
+                pom.dependencies.forEach { dep ->
+                    if(dep.getVersion() == 'unspecified') {
+                        dep.setGroupId(groupId)
+                        dep.setVersion(versionName)
+                    }
+                }
+            }
+        }
+    }
+}
